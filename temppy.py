@@ -1,4 +1,4 @@
-import os
+import os, bs4
 
 class Templater:
 
@@ -16,7 +16,6 @@ class Templater:
         str_result = ""
 
         state = 0
-        snippet_len = 0
         snippet = ""
         for i in range(len(str_temp)):
             char = str_temp[i]
@@ -24,26 +23,23 @@ class Templater:
 
             if char == '[' and state == 0: 
                 state = 1
-                snippet_len += 1
+                continue
             if char == '!' and state == 1:
                 state = 2
-                snippet_len += 1
                 continue
             if char == ']' and state == 2:
-                str_result = str_result[:i - snippet_len] #cuts off the snippet code
+                str_result = str_result[:i - (len(snippet) + 2)] #cuts off the snippet code
                 str_result += self.get_snippet(snippet) #adds the snippet's content in
-                
+
                 #reset
                 state = 0
-                snippet_len = 0
                 snippet = ""
                 continue
 
             if state == 2:
                 snippet += char
-                snippet_len += 1
 
-        return str_result
+        return bs4.BeautifulSoup(str_result, "html5lib").prettify()
 
     def get_snippet(self, snippet_name):
         snippet = open(os.path.join(self.snippet_dir, snippet_name + ".snip"), 'r')
@@ -51,6 +47,8 @@ class Templater:
         as_str = ""
         for line in snippet:
             as_str += line
+
+        # print(as_str)
         
         return as_str
 
