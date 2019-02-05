@@ -1,6 +1,6 @@
 
 
-#####Templater 
+#Templater 
 
 Templater goes through all files in a folder and replaces 
 text matching "[!sometexthere]" with the contents of a 
