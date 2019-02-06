@@ -8,6 +8,6 @@ file named "sometexthere.snip"
 
 The program arguments are:
 
-args[0] - the folder containing "snippets"
-args[1] - the folder containing the "template" files
-args[3] - the output folder
+<p>args[0] - the folder containing "snippets"</p>
+<p>args[1] - the folder containing the "template" files</p>
+<p>args[3] - the output folder</p>
